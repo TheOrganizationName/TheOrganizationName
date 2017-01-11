@@ -5,11 +5,9 @@ public class MainPanel extends JPanel implements Runnable{
 	int width = 1275;
 	int height = 975;
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		
-	}
+	final int numFood = 1000;
+	arraylist
+	
 	
 	 
 	public void pacmanStatus() {
