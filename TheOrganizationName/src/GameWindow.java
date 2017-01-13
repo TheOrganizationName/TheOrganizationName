@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
 public class GameWindow extends JFrame{
-	private ImageIcon image2;
+	private cImageIcon image2;
 	private JLabel label1;
 
 	GameWindow(){
