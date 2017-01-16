@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import objects.Student;
 
@@ -13,7 +15,6 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	public int lives=3;
 	int width = 1275;
 	int height = 975;
-	
 	final int numFood = 1000;
 	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>(numFood);
 	
@@ -47,7 +48,20 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		Font newFont = currentFont.deriveFont(currentFont.getSize() * 1.4F);
 		g.setFont(newFont);
 			g.drawString("counter: "+score,45,  45);
-			g.drawString
+			g.drawString("Lives",60,60);
+			
+			if(lives==2)
+			{
+
+			}
+			if(lives==1)
+			{
+				
+			}
+			if(lives==0)
+			{
+				
+			}
 		
 		}
     
