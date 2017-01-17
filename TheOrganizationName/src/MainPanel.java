@@ -16,6 +16,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	int width = 1275;
 	int height = 975;
 	final int numFood = 1000;
+	Pacman pacman=new Pacman( x,  y, left,  right,top, bottom);
+	{
+		
+	}
 	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>(numFood);
 	
 	public void pacmanPosition() {
@@ -31,12 +35,6 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 
 }
 	
-	public static void eatPoint(pacmanPosition,){
-		if (pacman.X == pointFruit.X && pacman.Y ==pointFruit){
-			
-		}
-		foodNum = numFood-1;
-	}
 
 	@Override
 	public void run() {
@@ -76,8 +74,8 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
     	int q;
     	int p;
     	
-		int x = Pacman.getX ();
-		int y = Pacman.getY ();
+		int x = (int)pacman.getX();
+		int y = (int)pacman.getY ();
 		
 		for( int i=0; i<ghosts.length;i++)
 		{
@@ -101,6 +99,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			{
 				
 				lives=lives-1;
+				
 				
 			}
 			

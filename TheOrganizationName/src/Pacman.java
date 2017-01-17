@@ -1,33 +1,50 @@
+import java.awt.Graphics;
 
 /**
  * 
  * movement for pacman
  *
  */
-public class Pacman extends MovingObjects {
+public class Pacman extends MovingObject {
 
-	public static void main(String[] args) throws InterruptedException {
+	public Pacman(double x, double y, int left, int right, int top, int bottom) {
+		super(x, y, left, right, top, bottom);
+		
 	}
 
-	private double x;
-	private double y;
+public double x;
 
-	public void setX(int x) {
-		this.x = x;
-	}
+/**
+ * The y location of the object.
+ */
+public double y;
 
-	public void setY(int y) {
-		this.y = y;
-	}
+public double setX(int x) {
+	this.x = x;
+}
 
-	public double getX() {
-		return x;
-	}
+/**
+ * Sets the y location.
+ * 
+ * @param y
+ *            New y location.
+ */
+public double setY(int y) {
+	this.y = y;
+}
+public double getX() {
+	return x;
+}
 
-	public double getY() {
-		return y;
-	}
-
+/**
+ * Returns the y location.
+ * 
+ * @return
+ *            the current y position
+ */
+public  double getY() {
+	return y;
+}
 	int key = 0;
 
 	public void pacmanMove() {
@@ -59,5 +76,17 @@ public class Pacman extends MovingObjects {
 			cursor.setXSpeed(7);
 			cursor.setYSpeed(0);
 		}
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void animateOneStep() {
+		// TODO Auto-generated method stub
+		
 	}
 }
