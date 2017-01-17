@@ -21,7 +21,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		
 	}
 	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>(numFood);
-	
+	PointFruit bananas = new PointFruit();
 	public void pacmanPosition() {
 		// TODO Auto-generated method stub
 		

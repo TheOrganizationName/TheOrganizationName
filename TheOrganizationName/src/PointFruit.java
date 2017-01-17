@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 
 
-public class PointFruit implements Runnable {
+public class PointFruit {
 
 	public static BufferedImage strawberriePic = null;// making strawbery picture a variable
 	public static BufferedImage watermelonPic = null;// making cherry picture a variable
