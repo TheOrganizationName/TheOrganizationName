@@ -5,10 +5,34 @@
  */
 public class MovingObjects {
 
-	private double x = 1;
+	private double x ;
+	
+	private double y  ; 
+	
+	private double xSpeed ; 
+	
+	private double ySpeed; 
 	
 	
-	private double y = 2 ; 
+	public void setX(int x){
+		this.x =x;
+	}
+	public void setY(int y){
+		this.y=y;
+	}
+	public void setXSpeed(int xSpeed){
+		this.xSpeed = xSpeed;
+	}
+	public void setYSpeed(int ySpeed){
+		this.ySpeed = ySpeed;
+	}
+	public double getYSpeed(){
+		return ySpeed; 
+	}
+	public double  getXSpeed(){
+		
+		return xSpeed;
+	}
 	
 	public double getX(){
 		return x;

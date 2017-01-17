@@ -76,8 +76,8 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
     	int q;
     	int p;
     	
-		int x = pacman.getX ();
-		int y = pacman.getY ();
+		int x = Pacman.getX ();
+		int y = Pacman.getY ();
 		
 		for( int i=0; i<ghosts.length;i++)
 		{

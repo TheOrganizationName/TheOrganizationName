@@ -6,11 +6,28 @@
  */
 public class Pacman extends MovingObjects {
 
-    
-	 public static void main (String[] args) throws InterruptedException
-	    {
-		 image1 = new ImageIcon(getClass().getResource("map.jpg"));
-	    }
+	public static void main(String[] args) throws InterruptedException {
+	}
+
+	private double x;
+	private double y;
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
 	int key = 0;
 
 	public void pacmanMove() {
