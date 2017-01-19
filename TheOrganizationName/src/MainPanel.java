@@ -1,23 +1,29 @@
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
-<<<<<<< HEAD
 import java.awt.FlowLayout;
-=======
->>>>>>> branch 'master' of https://github.com/TheOrganizationName/TheOrganizationName.git
-	import java.awt.Font;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JFrame;
 
-public class MainPanel extends JPanel implements Runnable, KeyListener {
+public class MainPanel extends JFrame implements Runnable, KeyListener {
+	
 	public int score = 0;
 	public int lives = 3;
 	int width = 1275;
@@ -34,6 +40,8 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	int left;
 	private ImageIcon image1;
 	private JLabel label1;
+	private ImageIcon image4;
+	private JLabel label4;
 	private ImageIcon image2;
 	private JLabel label2;
 	private ImageIcon image3;
@@ -58,12 +66,54 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	public MainPanel() {
+		
+		setLayout(new FlowLayout());
+		
+		image1 = new ImageIcon(getClass().getResource("map.jpg"));
 
+		label1 = new JLabel(image1);
+		add(label1);
+		
+		class Sound {
+			private Clip clip;
+
+			public Sound(String fileName) {
+				// specify the sound to play
+				// (assuming the sound can be played by the audio system)
+				// from a wave File
+				try {
+					File file = new File(fileName);
+					if (file.exists()) {
+						AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+						// load the sound into memory (a Clip)
+						clip = AudioSystem.getClip();
+						clip.open(sound);
+					} else {
+						throw new RuntimeException("Sound: file not found: " + fileName);
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					throw new RuntimeException("Sound: Malformed URL: " + e);
+				} catch (UnsupportedAudioFileException e) {
+					e.printStackTrace();
+					throw new RuntimeException("Sound: Unsupported Audio File: " + e);
+				} catch (IOException e) {
+					e.printStackTrace();
+					throw new RuntimeException("Sound: Input/Output Error: " + e);
+				} catch (LineUnavailableException e) {
+					e.printStackTrace();
+					throw new RuntimeException("Sound: Line Unavailable Exception Error: " + e);
+				}
+
+				// play, stop, loop the sound clip
+			}
+		}
+		
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.black);
 		for (int i = 0; i < listOfFruit.size(); i++) {
-			PointFruit[i] = new PointFruit(50, 50, 0, width, 0, height);
+			//PointFruit[i] = new PointFruit(50, 50, 0, width, 0, height);
 
 		}
 
@@ -82,23 +132,22 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		}
 		Thread gameThread1 = new Thread(this);
 		gameThread1.start();
-	}
-
-	@Override
+	}	
+	
 	public void run() {
 
-		while (true) {
-			repaint();
-			try {
-				Thread.sleep(pauseDuration);
-			} catch (InterruptedException e) {
-			}
-		}
+		//while (true) {
+			//repaint();
+			//try {
+		//		Thread.sleep(pauseDuration);
+			//} catch (InterruptedException e) {
+		//	}
+		//}
 	}
 
 	public void paintComponent(Graphics g) {
 
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		for (int i = 0; i < numGhosts; i++) {
 			ghost[i].draw(g);
 		}
@@ -111,20 +160,20 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		g.drawString("Lives",60,60);
 
 
-		image2 = new ImageIcon(getClass().getResource("Life.png"));
+		image2 = new ImageIcon(getClass().getResource("Life.jpg"));
 		label2 = new JLabel(image2);
 		add(label2);
 
 
 		if(lives==2)
 		{
-			image1 = new ImageIcon(getClass().getResource("Life.png"));
-			label1 = new JLabel(image1);
-			add(label1);
+			image4 = new ImageIcon(getClass().getResource("Life.jpg"));
+			label4 = new JLabel(image4);
+			add(label4);
 		}
 		if(lives==1)
 		{
-			image3 = new ImageIcon(getClass().getResource("Life.png"));
+			image3 = new ImageIcon(getClass().getResource("Life.jpg"));
 			label3 = new JLabel(image3);
 			add(label3);
 		}
@@ -136,12 +185,12 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 			g.drawString("You lose "+score,45,  45);
 			for(int i=0; i<listOfFruit.size();i++ )
 			{
-				PointFruit[i]=listOfFruit.remove(i);
+				//PointFruit[i]=listOfFruit.remove(i);
 			}
 
-			for(int i=0; i<listOfCoins.size();i++)
+			//for(int i=0; i<listOfCoins.size();i++)
 			{
-				coins[i]=listOfCoins.remove(i);
+				//coins[i]=listOfCoins.remove(i);
 			}
 
 		}
@@ -193,54 +242,54 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 
 			for( int i=0; i<listOfFruit.size();i++)
 			{
-				int z1=int(PointFruit.getX(i));
-				int k1=int(PointFruit.getY(i));
-				int r1=(PointFruit.getRadius(i);
+				//int z1=int(PointFruit.getX(i));
+				//int k1=int(PointFruit.getY(i));
+				//int r1=(PointFruit.getRadius(i);
 
-				differenceY= x-z1;
-				differenceX=y-k1;
+				//differenceY= x-z1;
+				//differenceX=y-k1;
 
-				if(differenceY<0|| differenceX<0)
+				//if(differenceY<0|| differenceX<0)
 				{
-					differenceY=differenceY*-1;
-					differenceX= differenceX*-1;
+					//differenceY=differenceY*-1;
+					//differenceX= differenceX*-1;
 
 				}
-				p= differenceY;
-				q= differenceX;
-				hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-				if(hypoteneuse<(r1+1))
+				//p= differenceY;
+				//q= differenceX;
+				//hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
+				//if(hypoteneuse<(r1+1))
 				{
 
 					score= score+5;
-					fruit[i]=listOfFruit.remove(i);
+					//fruit[i]=listOfFruit.remove(i);
 				}
 
 
 
-				for( int i=0; i<coins.length;i++)
+				//for( int i=0; i<coins.length;i++)
 				{
-					z1=(int)coin[i].getX();
-					k1=(int)coin[i].getY();
-					r1=(int)coin[i].getRadius();
+					//z1=(int)coin[i].getX();
+					//k1=(int)coin[i].getY();
+					//r1=(int)coin[i].getRadius();
 
-					differenceY= x-z1;
-					differenceX=y-k1;
+					//differenceY= x-z1;
+					//differenceX=y-k1;
 
-					if(differenceY<0|| differenceX<0)
+					//if(differenceY<0|| differenceX<0)
 					{
-						differenceY=differenceY*-1;
-						differenceX= differenceX*-1;
+						//differenceY=differenceY*-1;
+						//differenceX= differenceX*-1;
 
 					}
-					p= differenceY;
-					q= differenceX;
-					hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-					if(hypoteneuse<(r1+1))
+					//p= differenceY;
+					//q= differenceX;
+					//hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
+					//if(hypoteneuse<(r1+1))
 					{
 
 						score= score+5;
-						coin[i]=listOfCoins.remove(i);
+						//coin[i]=listOfCoins.remove(i);
 					}
 				}
 			}
@@ -260,5 +309,13 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	 **/
 	public void keyTyped(KeyEvent e) {
 		// this space intentionally left blank
+	}
+	
+	public static void main(String args[]) {
+		MainPanel gui = new MainPanel();
+		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gui.setVisible(true);
+		gui.pack();
+		gui.setTitle("Image Program");
 	}
 }
