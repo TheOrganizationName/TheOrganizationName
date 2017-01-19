@@ -71,6 +71,12 @@ import java.awt.Graphics;
 		{
 			return this.radius;
 		}
+
+		@Override
+		public void animateOneStep() {
+			// TODO Auto-generated method stub
+			
+		}
 		
 
 	}
