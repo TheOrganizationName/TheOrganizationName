@@ -1,30 +1,36 @@
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 
-public class PointFruit implements Runnable {
-
-	public static BufferedImage strawberriePic = null;// making strawbery picture a variable
-	public static BufferedImage watermelonPic = null;// making cherry picture a variable
-	public static BufferedImage cherryPic = null;// making watermelon picture a variable
+public class PointFruit {
+	public static Image bananaPic = null;
+	public static Image strawberriePic = null;// making strawbery picture a variable
+	public static Image watermelonPic = null;// making cherry picture a variable
+	public static Image cherryPic = null;// making watermelon picture a variable
 
 	/**
 	 * The x location of the object.
 	 */
-	private double x1;
+	private int x1;
 	/**
 	 * The y location of the object.
 	 */
-	private double y1;
+	private int y1;
 	/**
 	 * The x location of the object.
 	 */
-	private double x;
+	private int x;
 	/**
 	 * The y location of the object.
 	 */
-	private double y;
+	private int y;
 	/**
 	 * The x speed of the object.
 	 */
@@ -75,7 +81,7 @@ public class PointFruit implements Runnable {
 	 * @param bottom
 	 *            The bottom edge.
 	 */
-	public void pointFruit(double x, double y, int left, int right, int top,
+	public void pointFruit(int x, int y, int left, int right, int top,
 			int bottom) {
 
 		this.x = x;
@@ -84,20 +90,9 @@ public class PointFruit implements Runnable {
 		this.right = right;
 		this.top = top;
 		this.bottom = bottom;
-		startThread();
 	}
 
-	/**
-	 * keeps it in place.
-	 * 
-	 * @return
-	 *            the current y position
-	 */
-	public void startThread() {
-		moving = false;
-		Thread t = new Thread(this);
-		t.start();
-	}
+	
 
 	/**
 	 * Returns the x location.
@@ -106,7 +101,7 @@ public class PointFruit implements Runnable {
 	 *            the current x position
 	 */
 
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 
@@ -116,7 +111,7 @@ public class PointFruit implements Runnable {
 	 * @return
 	 *            the current y position
 	 */
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 
@@ -150,7 +145,7 @@ public class PointFruit implements Runnable {
 	 * @return
 	 *            the current y position
 	 */
-	public double getRandomY() {
+	public int getRandomY() {
 		return y1;
 	}
 
@@ -161,7 +156,7 @@ public class PointFruit implements Runnable {
 	 *            New x location.
 	 */
 	public void setRandomX(int x) {
-		this.x1 = Math.random()*1000;
+		this.x1 = (int) (Math.random()*1000);
 	}
 
 	/**
@@ -171,7 +166,7 @@ public class PointFruit implements Runnable {
 	 *            New y location.
 	 */
 	public void setrandomY(int y) {
-		this.y1 = Math.random()*1000;
+		this.y1 = (int) (Math.random()*1000);
 	}
 	
 	public void draw(Graphics g) {
@@ -180,22 +175,23 @@ public class PointFruit implements Runnable {
 			strawberriePic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting strawberrie picture
 			watermelonPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting cherry picture
 			cherryPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting watermelon picture
-		}Catch (IOException e){
-			g.print("Error");
+		}catch (IOException e){
+			g.drawString("Error", 40, 50);
 		}
-		int [] bananas = new int [10000];
-
-		for(i = 0, i < 950, i++){
-			for(j = 0, j < 1275, j++){
+		
+			for(int i = 0; i < 950; i++){
+			for(int j = 0; j < 1275; j++){
 
 				setX(i);
 				setY(j);
-				g.drawImage(bananaPic, x, y, null);// banana
+				g.drawImage(bananaPic, x, y, (ImageObserver) this);// banana
+				g.drawImage(watermelonPic, x, y, (ImageObserver) this);// banana
+				g.drawImage(strawberriePic, x, y, (ImageObserver) this);// banana
+				g.drawImage(cherryPic, x, y, (ImageObserver) this);// banana
 
 			}
 		}
 	}
-
 }
 
 
