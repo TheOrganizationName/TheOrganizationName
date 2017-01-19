@@ -44,7 +44,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	Pacman pacman=new Pacman( x,  y,left, right,  top,  bottom);
 
 
-	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>(numFruits);
+	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>();
 	PointFruit bananas = new PointFruit();
 
 	public void pacmanPosition() {
@@ -62,18 +62,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.black);
-		for (int i = 0; i < numBalls; i++) {
-			ball[i] = new FlashingBall(50, 50, 0, width, 0, height);
-			ball[i].setXSpeed(Math.random() * fast-8);
-			ball[i].setYSpeed(Math.random() * fast-8);
-			ball[i].setColor(new Color((int) (Math.random() * 256), (int) (Math
-					.random() * 256), (int) (Math.random() * 256)));
-			square[i] = new Square(50, 50, 0, width, 0, height);
-			square[i].setXSpeed(Math.random() * fast-8);
-			square[i].setYSpeed(Math.random() * fast-8);
-			square[i].setColor(new Color((int) (Math.random() * 256), (int) (Math
-					.random() * 256), (int) (Math.random() * 256)));
-			// sets the speed and color of the balls and squares
+		for (int i = 0; i < listOfFruit.size(); i++) {
+			PointFruit[i] = new PointFruit(50, 50, 0, width, 0, height);
+
 		}
 
 		Thread gameThread = new Thread(this);
@@ -89,8 +80,8 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 					new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
 
 		}
-		Thread gameThread = new Thread(this);
-		gameThread.start();
+		Thread gameThread1 = new Thread(this);
+		gameThread1.start();
 	}
 
 	@Override
@@ -143,14 +134,14 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 			Font newFonts = Fonts.deriveFont(Fonts.getSize() * 6.7F);
 			g.setFont(newFont);
 			g.drawString("You lose "+score,45,  45);
-			for(int i=0; i<fruits.length;i++ )
+			for(int i=0; i<listOfFruit.size();i++ )
 			{
-				fruit[i]=listOfFruit.remove(i);
+				PointFruit[i]=listOfFruit.remove(i);
 			}
 
-			for(int i=0; i<coins.length;i++)
+			for(int i=0; i<listOfCoins.size();i++)
 			{
-				coin[i]=listOfFruit.remove(i);
+				coins[i]=listOfCoins.remove(i);
 			}
 
 		}
@@ -200,14 +191,14 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		}
 		if (lives == 0) {
 
-			for( int i=0; i<PointFruit.size();i++)
+			for( int i=0; i<listOfFruit.size();i++)
 			{
-				int z=PointFruit1.getX(i);
-				int k=PointFruit1.getY(i);
-				int r=PointFruit1.getRadius(i);
+				int z1=int(PointFruit.getX(i));
+				int k1=int(PointFruit.getY(i));
+				int r1=(PointFruit.getRadius(i);
 
-				differenceY= x-z;
-				differenceX=y-k;
+				differenceY= x-z1;
+				differenceX=y-k1;
 
 				if(differenceY<0|| differenceX<0)
 				{
@@ -218,7 +209,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 				p= differenceY;
 				q= differenceX;
 				hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-				if(hypoteneuse<(r+1))
+				if(hypoteneuse<(r1+1))
 				{
 
 					score= score+5;
@@ -229,12 +220,12 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 
 				for( int i=0; i<coins.length;i++)
 				{
-					z=(int)coin[i].getX();
-					k=(int)coin[i].getY();
-					r=(int)coin[i].getRadius();
+					z1=(int)coin[i].getX();
+					k1=(int)coin[i].getY();
+					r1=(int)coin[i].getRadius();
 
-					differenceY= x-z;
-					differenceX=y-k;
+					differenceY= x-z1;
+					differenceX=y-k1;
 
 					if(differenceY<0|| differenceX<0)
 					{
@@ -245,7 +236,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 					p= differenceY;
 					q= differenceX;
 					hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-					if(hypoteneuse<(r+1))
+					if(hypoteneuse<(r1+1))
 					{
 
 						score= score+5;
