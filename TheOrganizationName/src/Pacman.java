@@ -19,7 +19,7 @@ public double x;
  */
 public double y;
 
-public void setX(int x) {
+public void  setX(int x) {
 	this.x = x;
 }
 

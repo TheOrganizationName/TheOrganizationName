@@ -12,69 +12,68 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class GameWindow extends JFrame{
+public class GameWindow extends JFrame {
 	private ImageIcon image1;
 	private JLabel label1;
 
-	GameWindow(){
+	GameWindow() {
 		setLayout(new FlowLayout());
-		
+
 		image1 = new ImageIcon(getClass().getResource("map.jpg"));
-		
+
 		label1 = new JLabel(image1);
 		add(label1);
-	}
-	
-	public class Sound {
-	    private Clip clip;
-	    public Sound(String fileName) {
-	        // specify the sound to play
-	        // (assuming the sound can be played by the audio system)
-	        // from a wave File
-	        try {
-	            File file = new File(fileName);
-	            if (file.exists()) {
-	                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
-	             // load the sound into memory (a Clip)
-	                clip = AudioSystem.getClip();
-	                clip.open(sound);
-	            }
-	            else {
-	                throw new RuntimeException("Sound: file not found: " + fileName);
-	            }
-	        }
-	        catch (MalformedURLException e) {
-	            e.printStackTrace();
-	            throw new RuntimeException("Sound: Malformed URL: " + e);
-	        }
-	        catch (UnsupportedAudioFileException e) {
-	            e.printStackTrace();
-	            throw new RuntimeException("Sound: Unsupported Audio File: " + e);
-	        }
-	        catch (IOException e) {
-	            e.printStackTrace();
-	            throw new RuntimeException("Sound: Input/Output Error: " + e);
-	        }
-	        catch (LineUnavailableException e) {
-	            e.printStackTrace();
-	            throw new RuntimeException("Sound: Line Unavailable Exception Error: " + e);
-	        }
+		}
 
-	    // play, stop, loop the sound clip
-	    }
-	    public void play(){
-	        clip.setFramePosition(0);  // Must always rewind!
-	        clip.start();
-	    }
-	    public void loop(){
-	        clip.loop(Clip.LOOP_CONTINUOUSLY);
-	    }
-	    public void stop(){
-	            clip.stop();
-	        }
-	    }
-	
-	public static void main (String args[]){
+	public class Sound {
+		private Clip clip;
+
+		public Sound(String fileName) {
+			// specify the sound to play
+			// (assuming the sound can be played by the audio system)
+			// from a wave File
+			try {
+				File file = new File(fileName);
+				if (file.exists()) {
+					AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+					// load the sound into memory (a Clip)
+					clip = AudioSystem.getClip();
+					clip.open(sound);
+				} else {
+					throw new RuntimeException("Sound: file not found: " + fileName);
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Sound: Malformed URL: " + e);
+			} catch (UnsupportedAudioFileException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Sound: Unsupported Audio File: " + e);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Sound: Input/Output Error: " + e);
+			} catch (LineUnavailableException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Sound: Line Unavailable Exception Error: " + e);
+			}
+
+			// play, stop, loop the sound clip
+		}
+
+		public void play() {
+			clip.setFramePosition(0); // Must always rewind!
+			clip.start();
+		}
+
+		public void loop() {
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+
+		public void stop() {
+			clip.stop();
+		}
+	}
+
+	public static void main(String args[]) {
 		GameWindow gui = new GameWindow();
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.setVisible(true);
