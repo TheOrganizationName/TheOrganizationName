@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
@@ -40,12 +41,14 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 	int left;
 	private ImageIcon image1;
 	private JLabel label1;
+
 	private ImageIcon image4;
 	private JLabel label4;
 	private ImageIcon image2;
 	private JLabel label2;
 	private ImageIcon image3;
 	private JLabel label3;
+	int key = 0;
 	int right;
 	int top;
 	int bottom;
@@ -67,12 +70,15 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 	public MainPanel() {
 		
-		setLayout(new FlowLayout());
+//		setLayout(new FlowLayout());
+//		
+//		image1 = new ImageIcon(getClass().getResource("map.jpg"));
+//
+//		label1 = new JLabel(image1);
+//		add(label1);
+		   
 		
-		image1 = new ImageIcon(getClass().getResource("map.jpg"));
-
-		label1 = new JLabel(image1);
-		add(label1);
+		
 		
 		class Sound {
 			private Clip clip;
@@ -117,8 +123,7 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 		}
 
-		Thread gameThread = new Thread(this);
-		gameThread.start();
+		
 
 		this.setPreferredSize(new Dimension(width, height));
 
@@ -130,24 +135,58 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 					new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
 
 		}
-		Thread gameThread1 = new Thread(this);
-		gameThread1.start();
+
+		addKeyListener(this);
+		Thread gameThread = new Thread(this);
+		gameThread.start();
 	}	
 	
 	public void run() {
 
-		//while (true) {
-			//repaint();
-			//try {
-		//		Thread.sleep(pauseDuration);
-			//} catch (InterruptedException e) {
-		//	}
-		//}
+		while (true) {
+			repaint();
+			this.requestFocus();
+			/**
+			 * up
+			 */
+			if (key == 38) {
+				pacman.setYSpeed(-7);
+				pacman.setXSpeed(0);
+			}
+			/**
+			 * down
+			 */
+			else if (key == 40) {
+				pacman.setYSpeed(7);
+				pacman.setXSpeed(0);
+			}
+			/**
+			 * left
+			 */
+			else if (key == 37) {
+				pacman.setXSpeed(-7);
+				pacman.setYSpeed(0);
+			}
+			/**
+			 * right
+			 */
+			else if (key == 39) {
+				pacman.setXSpeed(7);
+				pacman.setYSpeed(0);
+			}
+			
+			
+			try {
+				Thread.sleep(pauseDuration);
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 
 	public void paintComponent(Graphics g) {
 
-		//super.paintComponent(g);
+		super.paintComponents(g);
+	
 		for (int i = 0; i < numGhosts; i++) {
 			ghost[i].draw(g);
 		}
@@ -192,13 +231,15 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 			{
 				//coins[i]=listOfCoins.remove(i);
 			}
-
+       pacman.draw(g);
 		}
 	}	
 
 
 	public void keyPressed (KeyEvent e)
 	{
+		key = e.getKeyCode();
+		repaint();
 		int z;
 		int k;
 		int r;
@@ -298,7 +339,8 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 
 	public void keyReleased(KeyEvent e) {
-
+		key = 0;
+		repaint();
 	}
 
 	/**

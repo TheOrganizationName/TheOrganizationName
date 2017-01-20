@@ -5,10 +5,13 @@ import java.awt.Graphics;
  * movement for pacman
  *
  */
-public class Pacman extends MovingObject {
 
+public class Pacman extends MovingObject {
+	private int length; 
+	
 	public Pacman(double x, double y, int left, int right, int top, int bottom) {
 		super(x, y, left, right, top, bottom);
+		this.length = length;
 		
 	}
 
@@ -48,40 +51,21 @@ public  double getY() {
 	int key = 0;
 
 	public void pacmanMove() {
-		/**
-		 * up
-		 */
-		if (key == 38) {
-			cursor.setYSpeed(-7);
-			cursor.setXSpeed(0);
-		}
-		/**
-		 * down
-		 */
-		else if (key == 40) {
-			cursor.setYSpeed(7);
-			cursor.setXSpeed(0);
-		}
-		/**
-		 * left
-		 */
-		else if (key == 37) {
-			cursor.setXSpeed(-7);
-			cursor.setYSpeed(0);
-		}
-		/**
-		 * right
-		 */
-		else if (key == 39) {
-			cursor.setXSpeed(7);
-			cursor.setYSpeed(0);
-		}
+	
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		int radius = length/2;
+		int drawX = (int) getX() - radius;
+		int drawY = (int) getY() - radius;
+
+		g.setColor(color);
+		g.fillOval(drawX, drawY, length, length);
+	}
 		
+	public int getLength(){
+		return this.length;
 	}
 
 	@Override
