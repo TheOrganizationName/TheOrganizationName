@@ -1,7 +1,6 @@
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 
@@ -189,7 +188,7 @@ public class PointCoin {
 	
 	public void draw(Graphics g) {
 		try{
-			coinPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting banana picture
+			coinPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/coin.jpg"));// getting banana picture
 
 			
 		}catch (IOException e){

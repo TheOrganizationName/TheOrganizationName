@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
@@ -39,15 +40,15 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 	double x;
 	double y;
 	int left;
-	private ImageIcon image1;
-	private JLabel label1;
+	private BufferedImage image1;
+	private BufferedImage label1;
 
-	private ImageIcon image4;
-	private JLabel label4;
-	private ImageIcon image2;
-	private JLabel label2;
-	private ImageIcon image3;
-	private JLabel label3;
+	private BufferedImage image4;
+	private BufferedImage label4;
+	private BufferedImage image2;
+	private BufferedImage label2;
+	private BufferedImage image3;
+	private BufferedImage label3;
 	int key = 0;
 	int right;
 	int top;
@@ -71,14 +72,12 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 	}
 
-	public MainPanel() {
+	public MainPanel(Graphics g) {
 		
 		setLayout(new FlowLayout());
 		
-		image1 = new ImageIcon(getClass().getResource("map.jpg"));
-
-		label1 = new JLabel(image1);
-		add(label1);
+		//image1 = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/Map.jpg"));// getting banana picture
+		
 		   
 		
 		

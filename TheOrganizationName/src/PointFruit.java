@@ -1,7 +1,6 @@
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 
@@ -16,7 +15,7 @@ public class PointFruit {
 	public static Image cherryPic = null;// making watermelon picture a variable
 
 	/**
-	 * The x location of the object.
+	 * The radius location of the object.
 	 */
 	private int radius;
 	/**
@@ -96,7 +95,24 @@ public class PointFruit {
 		this.bottom = bottom;
 	}
 
-	
+	/**
+	 * Sets the radius.
+	 * 
+	 * @param x
+	 *            New radius.
+	 */
+	public void setRadius(int radius) {
+		radius=5;
+	}
+	/**
+	 * Returns the radius.
+	 * 
+	 * @param x
+	 *            New radius.
+	 */
+	public int getRadius() {
+		return this.radius;
+	}
 
 	/**
 	 * Returns the x location.
@@ -128,24 +144,7 @@ public class PointFruit {
 	public void setX(int x) {
 		this.x = x;
 	}
-	/**
-	 * Sets the x location.
-	 * 
-	 * @param x
-	 *            New x location.
-	 */
-	public void setRadius(int radius) {
-		radius= 7;
-	}
-	/**
-	 * Sets the x location.
-	 * 
-	 * @param x
-	 *            New x location.
-	 */
-	public int getRadius() {
-		return this.radius;
-	}
+	
 	/**
 	 * Sets the y location.
 	 * 
@@ -209,7 +208,7 @@ public class PointFruit {
 				g.drawImage(bananaPic, x, y, (ImageObserver) this);// banana
 				g.drawImage(watermelonPic, x, y, (ImageObserver) this);// banana
 				g.drawImage(strawberriePic, x, y, (ImageObserver) this);// banana
-				g.drawImage(cherryPic, x, y, (ImageObserver) this);// banana
+				g.drawImage(cherryPic, x, y, (ImageObserver) this);// cherry
 
 			}
 		}
