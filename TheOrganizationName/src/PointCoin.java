@@ -9,11 +9,8 @@ import javax.imageio.ImageIO;
 
 
 
-public class PointFruit {
-	public static Image bananaPic = null;
-	public static Image strawberriePic = null;// making strawbery picture a variable
-	public static Image watermelonPic = null;// making cherry picture a variable
-	public static Image cherryPic = null;// making watermelon picture a variable
+public class PointCoin {
+	public static Image coinPic = null;
 
 	/**
 	 * The x location of the object.
@@ -85,7 +82,7 @@ public class PointFruit {
 	 * @param bottom
 	 *            The bottom edge.
 	 */
-	public void pointFruit(int x, int y, int left, int right, int top,
+	public void pointCoin(int x, int y, int left, int right, int top,
 			int bottom) {
 
 		this.x = x;
@@ -192,10 +189,8 @@ public class PointFruit {
 	
 	public void draw(Graphics g) {
 		try{
-			bananaPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting banana picture
-			strawberriePic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting strawberrie picture
-			watermelonPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting cherry picture
-			cherryPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting watermelon picture
+			coinPic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/banana.jpg"));// getting banana picture
+
 			
 		}catch (IOException e){
 			g.drawString("Error", 40, 50);
@@ -206,10 +201,8 @@ public class PointFruit {
 
 				setX(i);
 				setY(j);
-				g.drawImage(bananaPic, x, y, (ImageObserver) this);// banana
-				g.drawImage(watermelonPic, x, y, (ImageObserver) this);// banana
-				g.drawImage(strawberriePic, x, y, (ImageObserver) this);// banana
-				g.drawImage(cherryPic, x, y, (ImageObserver) this);// banana
+				g.drawImage(coinPic, x, y, (ImageObserver) this);// banana
+				
 
 			}
 		}

@@ -57,6 +57,8 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 
 	public static ArrayList <PointFruit> listOfFruit= new ArrayList<PointFruit>();
+	public static ArrayList <PointCoin> listOfCoins= new ArrayList<PointCoin>();
+	PointCoin coins = new PointCoin();
 	PointFruit bananas = new PointFruit();
 
 	public void pacmanPosition() {
@@ -119,10 +121,7 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBackground(Color.black);
-		for (int i = 0; i < listOfFruit.size(); i++) {
-			//PointFruit[i] = new PointFruit(50, 50, 0, width, 0, height);
 
-		}
 
 		
 
@@ -227,7 +226,7 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 			g.drawString("You lose "+score,45,  45);
 			for(int i=0; i<listOfFruit.size();i++ )
 			{
-				//PointFruit[i]=listOfFruit.remove(i);
+				listOfFruit.remove(i);
 			}
 
 			//for(int i=0; i<listOfCoins.size();i++)
@@ -286,27 +285,27 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 			for( int i=0; i<listOfFruit.size();i++)
 			{
-				//int z1=int(PointFruit.getX(i));
-				//int k1=int(PointFruit.getY(i));
-				//int r1=(PointFruit.getRadius(i);
+				int z1=listOfFruit.get(i).getX();
+				int k1=listOfFruit.get(i).getY();
+				int r1=listOfFruit.get(i).getRadius();
 
-				//differenceY= x-z1;
-				//differenceX=y-k1;
+				differenceY= x-z1;
+				differenceX=y-k1;
 
-				//if(differenceY<0|| differenceX<0)
+				if(differenceY<0|| differenceX<0)
 				{
-					//differenceY=differenceY*-1;
-					//differenceX= differenceX*-1;
+					differenceY=differenceY*-1;
+					differenceX= differenceX*-1;
 
 				}
-				//p= differenceY;
-				//q= differenceX;
-				//hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-				//if(hypoteneuse<(r1+1))
+				p= differenceY;
+				q= differenceX;
+				hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
+				if(hypoteneuse<(r1+1))
 				{
 
 					score= score+5;
-					//fruit[i]=listOfFruit.remove(i);
+					listOfFruit.remove(i);
 				}
 
 
