@@ -201,20 +201,20 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 		g.drawString("Lives",60,60);
 
 
-		image2 = new ImageIcon(getClass().getResource("Life.jpg"));
+		image2 = new ImageIcon(getClass().getResource("resource/Life.jpg"));
 		label2 = new JLabel(image2);
 		add(label2);
 
 
 		if(lives==2)
 		{
-			image4 = new ImageIcon(getClass().getResource("Life.jpg"));
+			image4 = new ImageIcon(getClass().getResource("resource/Life.jpg"));
 			label4 = new JLabel(image4);
 			add(label4);
 		}
 		if(lives==1)
 		{
-			image3 = new ImageIcon(getClass().getResource("Life.jpg"));
+			image3 = new ImageIcon(getClass().getResource("resource/Life.jpg"));
 			label3 = new JLabel(image3);
 			add(label3);
 		}
@@ -229,11 +229,11 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 				listOfFruit.remove(i);
 			}
 
-			//for(int i=0; i<listOfCoins.size();i++)
+			for(int i=0; i<listOfCoins.size();i++)
 			{
-				//coins[i]=listOfCoins.remove(i);
+				listOfCoins.remove(i);
 			}
-       pacman.draw(g);
+       
 		}
 	}	
 
@@ -281,7 +281,6 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 			}
 
 		}
-		if (lives == 0) {
 
 			for( int i=0; i<listOfFruit.size();i++)
 			{
@@ -310,34 +309,34 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 
 
-				//for( int i=0; i<coins.length;i++)
+				for( int j=0; j<listOfCoins.size();j++)
 				{
-					//z1=(int)coin[i].getX();
-					//k1=(int)coin[i].getY();
-					//r1=(int)coin[i].getRadius();
+					int z11=listOfCoins.get(j).getX();
+					int k11=listOfCoins.get(j).getY();
+					int r11=listOfCoins.get(j).getRadius();
 
-					//differenceY= x-z1;
-					//differenceX=y-k1;
+					differenceY= x-z11;
+					differenceX=y-k11;
 
-					//if(differenceY<0|| differenceX<0)
+					if(differenceY<0|| differenceX<0)
 					{
-						//differenceY=differenceY*-1;
-						//differenceX= differenceX*-1;
+						differenceY=differenceY*-1;
+						differenceX= differenceX*-1;
 
 					}
-					//p= differenceY;
-					//q= differenceX;
-					//hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
-					//if(hypoteneuse<(r1+1))
+					p= differenceY;
+					q= differenceX;
+					hypoteneuse=(int) Math.pow((p*p+q*q), 0.5);
+					if(hypoteneuse<(r11+1))
 					{
 
 						score= score+5;
-						//coin[i]=listOfCoins.remove(i);
+						listOfCoins.remove(i);
 					}
 				}
 			}
 		}
-	}
+	
 
 
 	public void keyReleased(KeyEvent e) {
