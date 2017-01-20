@@ -52,6 +52,7 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 	int right;
 	int top;
 	int bottom;
+			
 	Pacman pacman=new Pacman( x,  y,left, right,  top,  bottom);
 
 
@@ -70,12 +71,12 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 
 	public MainPanel() {
 		
-//		setLayout(new FlowLayout());
-//		
-//		image1 = new ImageIcon(getClass().getResource("map.jpg"));
-//
-//		label1 = new JLabel(image1);
-//		add(label1);
+		setLayout(new FlowLayout());
+		
+		image1 = new ImageIcon(getClass().getResource("map.jpg"));
+
+		label1 = new JLabel(image1);
+		add(label1);
 		   
 		
 		
@@ -135,7 +136,9 @@ public class MainPanel extends JFrame implements Runnable, KeyListener {
 					new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
 
 		}
-
+		pacman.setXSpeed(0);
+		pacman.setYSpeed(0);
+		pacman.setColor(new Color(0,0,0));
 		addKeyListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
