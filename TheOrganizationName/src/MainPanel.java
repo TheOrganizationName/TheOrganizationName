@@ -8,6 +8,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
@@ -26,8 +29,10 @@ import javax.swing.JLabel;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
-public class MainPanel extends JPanel implements Runnable, KeyListener {
-
+public class MainPanel extends JPanel implements Runnable, KeyListener{
+//	int mouseX = 0;
+//	int mouseY = 0;
+//	, MouseMotionListener
 	 public int score = 0;
 	 public int lives = 3;
 	int width = 1275;
@@ -35,7 +40,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 
 	 final int numFood = 1000;
 
-	int numGhosts = 1;
+	int numGhosts = 3;
 	final int pauseDuration = 10;
 	Ghosts[] ghost = new Ghosts[numGhosts];
 
@@ -74,7 +79,6 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		frame.setAutoRequestFocus(false);
 		frame.setVisible(true);
 		Container c = frame.getContentPane();
-		frame.setBackground(Color.BLACK);
 		c.add(new MainPanel());
 		frame.pack();
 
@@ -92,19 +96,21 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	public MainPanel() {
 		// Start the ball bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
-		this.setBackground(Color.BLACK);
+		
+		
 		pacman.setXSpeed(0);
 		pacman.setYSpeed(0);
 		pacman.setColor(new Color(0, 0, 0));
 		for (int i = 0; i < numGhosts; i++) {
-			ghost[i] = new Ghosts(50, 50, 0, width, 0, height);
-			ghost[i].setXSpeed(5);
-			ghost[i].setXSpeed(5);
-			ghost[i].setColor(
-					new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256)));
+			ghost[i] = new Ghosts(100, 0, 0, width, 10, height);
+			ghost[i].setXSpeed((Math.random() * 16 - 8));
+			ghost[i].setYSpeed((Math.random() * 16 - 8));
+			ghost[i].setColor(Color.WHITE);
+					
 		}
 
 		addKeyListener(this);
+		//addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
 		 class Sound {
@@ -193,7 +199,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	public void paintComponent(Graphics g) {
 
 		super.paintComponents(g);
-
+        g.setColor(Color.BLACK);
+		g.fillRect(0, 0, width, height);
+		repaint();
 		try {
 			map = ImageIO.read(MainPanel.class.getResourceAsStream("map.jpg"));
 		} catch (IOException e) {
@@ -213,7 +221,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		
 		 g.drawString("counter: " + score, 0, 70);
 		 g.drawString("Lives :", 0, 20);
-		
+		 //g.drawString ( + mouseX + "," + mouseY , 0, 20);
 		 try {
 		 life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.jpg"));
 		 } catch (IOException e) {
@@ -254,6 +262,24 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 		 }
 		
 	}
+	/*
+	 * used for finding the x and y of walls 
+	 * 
+	 */
+//	public void mouseDragged(MouseEvent arg0) {
+//		repaint();
+//	}
+
+	/**
+	 * used for finding the x and y of walls 
+	 */
+//	public void mouseMoved(MouseEvent arg0) {
+//
+//		mouseX = arg0.getX();
+//		mouseY = arg0.getY();
+//		repaint();
+//	}
+
 
 	public void keyPressed(KeyEvent e) {
 		key = e.getKeyCode();
@@ -355,5 +381,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// this space intentionally left blank
 	}
+
+	
+
+	
 
 }
