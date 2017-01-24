@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -30,29 +31,28 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 
-public class MainPanel extends JPanel implements Runnable, KeyListener{
-//	int mouseX = 0;
-//	int mouseY = 0;
-//	, MouseMotionListener
-	 public int score = 0;
-	 public int lives = 3;
+public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMotionListener {
+	 int mouseX = 0;
+	 int mouseY = 0;
+	// , MouseMotionListener
+	public int score = 0;
+	public int lives = 3;
 	int width = 1275;
 	int height = 975;
 	int item = 100;
 
-	 final int numFood = 1000;
-
+	final int numFood = 1000;
 
 	int numGhosts = 3;
 	final int pauseDuration = 10;
-	Ghosts[] ghost = new Ghosts[numGhosts];
+	//Ghosts[] ghost = new Ghosts[numGhosts];
 
 	double x;
 	double y;
 	int left;
-
+    ArrayList<Ghosts> ghost = new ArrayList<Ghosts>();
 	static ArrayList<Point> points = new ArrayList<Point>();
-	static ArrayList<Point> wallpoints= new ArrayList<Point>();
+	static ArrayList<Point> wallpoints = new ArrayList<Point>();
 	ArrayList<PointItem> items = new ArrayList<PointItem>();
 
 	int key = 0;
@@ -63,20 +63,8 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	public static BufferedImage life = null;
 	Pacman pacman = new Pacman(50, 50, 0, width, 0, height, Shape.PACMAN, 10);
 
+	public static void main(String args[]) {
 
-
-
-
-	public static void main(String args[]){
-		// JFrame gui = new JFrame();
-		// gui.setBounds(0, 0, 1350, 700);
-		// gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// gui.setVisible(true);
-		// gui.pack();
-		// gui.setTitle("Pacman");
-		// Container c = gui.getContentPane();
-		// c.add(new MainPanel());
-		// }
 		JFrame frame = new JFrame("Pacman");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(500, 300));
@@ -91,37 +79,35 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	}
 
 	public static void pointsLocation() {
-		
-		//Coordinates por points
-		points.add(new Point(970,50));
-		points.add(new Point(555,50));
-		points.add(new Point(715,50));
-		points.add(new Point(1180,50));
 
-		points.add(new Point(970,175));
-		points.add(new Point(555,175));
-		points.add(new Point(715,175));
-		points.add(new Point(1180,175));
+		// Coordinates por points
+		points.add(new Point(970, 50));
+		points.add(new Point(555, 50));
+		points.add(new Point(715, 50));
+		points.add(new Point(1180, 50));
 
-		points.add(new Point(970,250));
-		points.add(new Point(555,250));
-		points.add(new Point(715,250));
-		points.add(new Point(1180,250));
+		points.add(new Point(970, 175));
+		points.add(new Point(555, 175));
+		points.add(new Point(715, 175));
+		points.add(new Point(1180, 175));
 
-		points.add(new Point(970,348));
-		points.add(new Point(555,348));
-		points.add(new Point(715,348));
-		points.add(new Point(1180,348));
+		points.add(new Point(970, 250));
+		points.add(new Point(555, 250));
+		points.add(new Point(715, 250));
+		points.add(new Point(1180, 250));
 
-		points.add(new Point(970,425));
-		points.add(new Point(555,425));
-		points.add(new Point(715,425));
-		points.add(new Point(1180,425));
-		
-		
-		//coordinates of walls
-		wallpoints.add(new Point ());
+		points.add(new Point(970, 348));
+		points.add(new Point(555, 348));
+		points.add(new Point(715, 348));
+		points.add(new Point(1180, 348));
 
+		points.add(new Point(970, 425));
+		points.add(new Point(555, 425));
+		points.add(new Point(715, 425));
+		points.add(new Point(1180, 425));
+
+		// coordinates of walls
+		wallpoints.add(new Point());
 
 	}
 
@@ -130,50 +116,44 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 
 	}
 
-
-
 	public void pacmanStatus() {
 		// TODO Auto-generated method stub
 
 	}
 
-
-
 	public MainPanel() {
 
 		// Start the ghosts bouncing (in its own thread)
 		this.setPreferredSize(new Dimension(width, height));
-		
-		
+
 		pacman.setXSpeed(0);
 		pacman.setYSpeed(0);
 		pacman.setColor(new Color(0, 0, 0));
 		for (int i = 0; i < numGhosts; i++) {
-			ghost[i] = new Ghosts(100, 0, 0, width, 10, height);
-			ghost[i].setXSpeed((Math.random() * 16 - 8));
-			ghost[i].setYSpeed((Math.random() * 16 - 8));
-			ghost[i].setColor(Color.WHITE);
-					
+			ghost.add (new Ghosts(270, 39, 270, 348, 39, 686));
+			ghost.get(i).setXSpeed(5);
+			ghost.add(new Ghosts(411,148,411,849,148,514));
+			ghost.get(i).setYSpeed(5);
+			ghost.get(i).setColor(Color.WHITE);
+
 		}
 
-		//Creating locations for the fruits
+		// Creating locations for the fruits
 		for (int i = 0; i < points.size(); i++) {
 			double random = Math.random() * 10;
-			if(random<=4){
-			items.add(new PointFruit((int)points.get(i).getX(),(int)points.get(i).getY()));
-			items.get(i).setHeight(30);
-			items.get(i).setWidth(25);
-			}
-			else{
-				items.add(new PointCoin((int)points.get(i).getX(),(int)points.get(i).getY()));
-			items.get(i).setHeight(10);
-			items.get(i).setWidth(10);
+			if (random <= 4) {
+				items.add(new PointFruit((int) points.get(i).getX(), (int) points.get(i).getY()));
+				items.get(i).setHeight(30);
+				items.get(i).setWidth(25);
+			} else {
+				items.add(new PointCoin((int) points.get(i).getX(), (int) points.get(i).getY()));
+				items.get(i).setHeight(10);
+				items.get(i).setWidth(10);
 			}
 		}
 
-
 		addKeyListener(this);
-		//addMouseMotionListener(this);
+		addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
 		class Sound {
@@ -218,11 +198,12 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		while (true) {
 
 			this.requestFocus();
+			
 			/**
 			 * up
 			 */
 			if (key == 38) {
-				pacman.setYSpeed(-7);
+				pacman.setYSpeed(-5);
 				pacman.setXSpeed(0);
 
 			}
@@ -230,7 +211,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			 * down
 			 */
 			else if (key == 40) {
-				pacman.setYSpeed(7);
+				pacman.setYSpeed(5);
 				pacman.setXSpeed(0);
 
 			}
@@ -238,7 +219,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			 * left
 			 */
 			else if (key == 37) {
-				pacman.setXSpeed(-7);
+				pacman.setXSpeed(-5);
 				pacman.setYSpeed(0);
 
 			}
@@ -246,11 +227,15 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			 * right
 			 */
 			else if (key == 39) {
-				pacman.setXSpeed(7);
+				pacman.setXSpeed(5);
 				pacman.setYSpeed(0);
 
 			}
-
+			 for (int i = 0; i < ghost.size(); i++) {
+						 if (hit(ghost.get(i))) {
+						 lives--;
+						 }
+			 }
 			repaint();
 			try {
 				Thread.sleep(pauseDuration);
@@ -259,10 +244,25 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		}
 	}
 
-	public void paintComponent(Graphics g) {
+	
+	public boolean hit(Ghosts ghost){
+		int radius = ( ghost).getRadius();
+		 double xDistance = x - ghost.getX();
+		 double yDistance = y- ghost.getY();
+		 double hyp = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 		
+		 return hyp <= radius;
+		 }
+		
+		
+	
+	
+	
+	
+	public void paintComponent(Graphics g) {
+
 		super.paintComponents(g);
-        g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 		repaint();
 		try {
@@ -274,7 +274,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		g.drawImage(map, 0, 0, 1275, 900, null);
 		// need to fix ghosts
 		for (int i = 0; i < numGhosts; i++) {
-			ghost[i].draw(g);
+			ghost.get(i).draw(g);
 		}
 		pacman.draw(g);
 		g.setColor(Color.WHITE);
@@ -282,9 +282,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		Font newFont = currentFont.deriveFont(currentFont.getSize() * 1.4F);
 		g.setFont(newFont);
 
-		g.drawString("counter: " + score, 0, 70);
+		//g.drawString("counter: " + score, 0, 70);
 		g.drawString("Lives :", 0, 20);
-
+		g.drawString ("Last Known Location: (" + mouseX+ "," + mouseY + ")", 0,70);
 		try {
 			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.png"));
 		} catch (IOException e) {
@@ -327,26 +327,24 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			items.get(i).draw(g);
 		}
 
-
 	}
 	/*
-	 * used for finding the x and y of walls 
+	 * used for finding the x and y of walls
 	 * 
 	 */
-//	public void mouseDragged(MouseEvent arg0) {
-//		repaint();
-//	}
+	 public void mouseDragged(MouseEvent arg0) {
+	 repaint();
+	 }
 
-	/**
-	 * used for finding the x and y of walls 
-	 */
-//	public void mouseMoved(MouseEvent arg0) {
-//
-//		mouseX = arg0.getX();
-//		mouseY = arg0.getY();
-//		repaint();
-//	}
-
+//	/**
+//	 * used for finding the x and y of walls
+//	 */
+	 public void mouseMoved(MouseEvent arg0) {
+	
+	 mouseX = arg0.getX();
+	 mouseY = arg0.getY();
+	 repaint();
+	 }
 
 	public void keyPressed(KeyEvent e) {
 		key = e.getKeyCode();
@@ -363,10 +361,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		int x = (int) pacman.getX();
 		int y = (int) pacman.getY();
 
-		for (int i = 0; i < ghost.length; i++) {
-			z = (int) ghost[i].getX();
-			k = (int) ghost[i].getY();
-			r = (int) ghost[i].getRadius();
+		for (int i = 0; i < ghost.size(); i++) {
+			z = (int) ghost.get(i).getX();
+			k = (int) ghost.get(i).getY();
+			r = (int) ghost.get(i).getRadius();
 
 			differenceY = x - z;
 			differenceX = y - k;
@@ -448,9 +446,5 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// this space intentionally left blank
 	}
-
-	
-
-	
 
 }
