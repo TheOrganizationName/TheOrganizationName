@@ -54,6 +54,12 @@ public class PointItem {
 	public void setRadius(int radius) {
 		radius=5;
 	}
+	public void setWidth(int width){
+		this.width=width;
+	}
+	public void setHeight(int height){
+		this.height=height;
+	}
 	/**
 	 * Returns the radius.
 	 * 

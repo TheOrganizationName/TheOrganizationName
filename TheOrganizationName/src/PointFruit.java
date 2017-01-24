@@ -18,7 +18,7 @@ public class PointFruit extends PointItem{
 	public PointFruit(int x, int y) {
 		super(x, y);
 		try{
-			pic = ImageIO.read(new File("resource/banana.jpg"));// getting banana picture
+			pic = ImageIO.read(new File("resource/banana.png"));// getting banana picture
 		}catch (IOException e){
 			System.err.println(e.getMessage());
 		}
@@ -28,7 +28,7 @@ public class PointFruit extends PointItem{
 	
 	public void draw(Graphics g) {
 
-		g.drawImage(pic, x, y, null);// banana
+		g.drawImage(pic, x, y, width, height, null);// banana
 	}
 
 	

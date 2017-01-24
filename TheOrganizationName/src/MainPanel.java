@@ -157,13 +157,18 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		}
 
 		//Creating locations for the fruits
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < points.size(); i++) {
 			double random = Math.random() * 10;
 			if(random<=4){
 			items.add(new PointFruit((int)points.get(i).getX(),(int)points.get(i).getY()));
+			items.get(i).setHeight(30);
+			items.get(i).setWidth(25);
 			}
-			else
+			else{
 				items.add(new PointCoin((int)points.get(i).getX(),(int)points.get(i).getY()));
+			items.get(i).setHeight(10);
+			items.get(i).setWidth(10);
+			}
 		}
 
 
