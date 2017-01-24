@@ -286,27 +286,27 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		g.drawString("Lives :", 0, 20);
 
 		try {
-			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.jpg"));
+			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		if (lives == 3) {
-			g.drawImage(life, 50, 0, 50, 50, null);
-			g.drawImage(life, 100, 0, 50, 50, null);
-			g.drawImage(life, 150, 0, 50, 50, null);
+			g.drawImage(life, 50, 0, 100, 50, null);
+			g.drawImage(life, 100, 0, 100, 50, null);
+			g.drawImage(life, 150, 0, 100, 50, null);
 		}
 
 		if (lives == 2) {
 
-			g.drawImage(life, 50, 0, 50, 50, null);
-			g.drawImage(life, 100, 0, 50, 50, null);
+			g.drawImage(life, 50, 0, 100, 50, null);
+			g.drawImage(life, 100, 0, 100, 50, null);
 
 		}
 		if (lives == 1) {
 
-			g.drawImage(life, 50, 0, 50, 50, null);
+			g.drawImage(life, 50, 0, 100, 50, null);
 
 		}
 		if (lives == 0) {

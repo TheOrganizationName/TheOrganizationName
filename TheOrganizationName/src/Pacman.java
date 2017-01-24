@@ -66,12 +66,12 @@ public class Pacman extends MovingObject {
 	public void draw(Graphics g) {
 		
 			try {
-				pacman = ImageIO.read(MainPanel.class.getResourceAsStream("pacman.jpg"));
+				pacman = ImageIO.read(MainPanel.class.getResourceAsStream("Pacman.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			g.drawImage(pacman, (int) getX(), (int) getY(), 50, 50, null);
+			g.drawImage(pacman, (int) getX(), (int) getY(), null);
 		}
 		
 	
