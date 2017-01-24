@@ -9,7 +9,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-
+/**
+ *  sets the picture for the fruit 
+ * @author 
+ * PointFruit.java
+ * Jan 24 2017
+ *
+ */
 public class PointFruit extends PointItem{
 	/**
 	 * Makes picture a variable

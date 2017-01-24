@@ -1,4 +1,10 @@
-
+/**
+ * set where the walls would go but didnt get to it 
+ * @author 
+ * wall.java
+ * Jan 24 2017
+ *
+ */
 public class wall {
 
 	public wall() {

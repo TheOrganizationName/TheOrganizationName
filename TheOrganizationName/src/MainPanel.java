@@ -37,9 +37,9 @@ import javax.swing.JFrame;
  *  Jan 17 2017 
  *   
  */
-public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMotionListener {
-	 int mouseX = 0;
-	 int mouseY = 0;
+public class MainPanel extends JPanel implements Runnable, KeyListener  {
+//	 int mouseX = 0;
+//	 int mouseY = 0;
 	// , MouseMotionListener
 	public int score = 0;
 	public int lives = 3;
@@ -65,8 +65,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 	int right;
 	int top;
 	int bottom;
-	public static BufferedImage map = null;
-	public static BufferedImage life = null;
+	//public static BufferedImage map = null;
+	public static Image map = null;
+	//public static BufferedImage life = null;
+	public static Image life = null;
 	Pacman pacman = new Pacman(50, 50, 0, width, 0, height, Shape.PACMAN, 10);
 /**
  * Creates the Jframe
@@ -166,7 +168,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		}
 
 		addKeyListener(this);
-		addMouseMotionListener(this);
+		//addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
 //		class Sound {
@@ -249,8 +251,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 //			 for (int i = 0; i < ghost.size(); i++) {
 //						 if (hit(ghost.get(i))) {
 //						 lives--;
+//						 System.out.println("hit");
 //						 }
-//			 }
+			// }
 			repaint();
 			try {
 				Thread.sleep(pauseDuration);
@@ -268,13 +271,14 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 //		
 //		 return hyp <= radius;
 //		 }
-		
-		
+//		
+//		
 	
 	
 	
 	/**
 	 * displays the map, ghosts ,lives, and items to the screen 
+	 * @param g
 	 */
 	public void paintComponent(Graphics g) {
 
@@ -299,11 +303,11 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		Font newFont = currentFont.deriveFont(currentFont.getSize() * 1.4F);
 		g.setFont(newFont);
 
-		//g.drawString("counter: " + score, 0, 70);
+		g.drawString("counter: " + score, 0, 70);
 		g.drawString("Lives :", 0, 20);
-		g.drawString ("Last Known Location: (" + mouseX+ "," + mouseY + ")", 0,70);
+		//g.drawString ("Last Known Location: (" + mouseX+ "," + mouseY + ")", 0,70);
 		try {
-			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.jpg"));
+			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -364,10 +368,11 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 //	 }
 /**
  * checks what key is pressed and checks if pacman hits an enemy 
+ * @param e
  */
 	public void keyPressed(KeyEvent e) {
 		key = e.getKeyCode();
-		repaint();
+ 	repaint();
 		int z;
 		int k;
 		int r;
@@ -426,7 +431,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 				items.remove(i);
 			}
 
-			for (int j = 0; j < items.size(); j++) {
+		for (int j = 0; j < items.size(); j++) {
 				int z11 = items.get(j).getX();
 				int k11 = items.get(j).getY();
 				int r11 = items.get(j).getRadius();
@@ -450,7 +455,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 			}
 		}
 	}
-
+/**
+ * when the key is released it sets it to 0
+ * @param e
+ */
 	public void keyReleased(KeyEvent e) {
 		key = 0;
 		repaint();

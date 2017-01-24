@@ -1,18 +1,17 @@
 
 import java.awt.Graphics;
-
+/**
+ * creates the ghost 
+ * @author 
+ * Ghosts.java
+ * Jan 24 2017 
+ *
+ */
 public class Ghosts extends MovingObject {
 	/**
-	 * The radius of the ball.
+	 * The radius of the ghost.
 	 */
 	private int radius;
-	private int counter ;
-
-	/**
-	 * Controls the flash - true if the ball is filled in, false if it is an
-	 * outline.
-	 */
-	private boolean filledIn;
 
 	/**
 	 * Calls the superclass constructor, plus sets radius, and flash parameters.
@@ -34,22 +33,19 @@ public class Ghosts extends MovingObject {
 		super(x, y, left + 10, right - 10, top + 10, bottom - 10);
 		// numbers above must match the radius
 		radius = 10;
-		;
 
-		filledIn = true;
 	}
 
 	/**
-	 * Controls the animation parameters. (Called once every time the ball
+	 * Controls the animation parameters. (Called once every time the ghost
 	 * position is updated.)
 	 */
 	public void animateOneStep() {
-		counter++;
-		
+
 	}
 
 	/**
-	 * Draws the ball
+	 * Draws the ghost
 	 * 
 	 * @param g
 	 *            The graphics context.
@@ -64,25 +60,9 @@ public class Ghosts extends MovingObject {
 	}
 
 	/**
-	 * Returns true if the ball is filled in.
+	 * Gives the radius of the ghost.
 	 * 
-	 * @return true if the ball is filled in, false otherwise.
-	 */
-	public boolean isFilled() {
-		return filledIn;
-	}
-
-	/**
-	 * Fills the circle.
-	 */
-	public void fillCircle() {
-		filledIn = true;
-	}
-
-	/**
-	 * Gives the radius of the ball.
-	 * 
-	 * @return the radius of the ball.
+	 * @return the radius of the ghost.
 	 */
 	public int getRadius() {
 		return this.radius;

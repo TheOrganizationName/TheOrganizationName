@@ -6,7 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-
+/**
+ * Sets the location of the items 
+ * @author 
+ *PointItem.java
+ *Jan 24 2017
+ *
+ */
 
 public class PointItem {
 	// number of point items

@@ -3,7 +3,8 @@ import java.awt.Graphics;
 
 /**
  * this class is for all moving objects
- * 
+ * MovingObject.java
+ * Jan 24 2017
  *
  */
 public abstract class MovingObject implements Runnable {

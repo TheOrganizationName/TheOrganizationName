@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 	public class Enemies extends MovingObject {
 		/**
-		 * The radius of the ball.
+		 * The radius of the ghost.
 		 */
 		private int radius;
 		/**

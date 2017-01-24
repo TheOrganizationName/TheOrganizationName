@@ -8,7 +8,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
+/**
+ * sets the picture for the coins 
+ * PointCoin.java
+ *Jan 24 2017
+ */
 public class PointCoin extends PointItem {
 	
 	/**
@@ -19,7 +23,7 @@ public class PointCoin extends PointItem {
 	public PointCoin(int x, int y) {
 		super(x, y);
 		try{
-			pic = ImageIO.read(new File("resource/coin.png"));// getting banana picture
+			pic = ImageIO.read(new File("resource/coin.png"));// getting coin picture
 		}catch (IOException e){
 			System.err.println(e.getMessage());
 		}
@@ -28,7 +32,7 @@ public class PointCoin extends PointItem {
 	
 	
 	public void draw(Graphics g) {
-		g.drawImage(pic, x, y, width, height, null);// banana
+		g.drawImage(pic, x, y, width, height, null);// coin
 	}
 	
 	
