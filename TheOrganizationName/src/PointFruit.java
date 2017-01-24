@@ -15,8 +15,8 @@ public class PointFruit extends PointItem{
 	 */
 	public static Image pic = null;
 
-	public PointFruit(double x, double y, int left, int right, int top, int bottom) {
-		super(x, y, left, right, top, bottom);
+	public PointFruit(int x, int y) {
+		super(x, y);
 		try{
 			pic = ImageIO.read(new File("resource/banana.jpg"));// getting banana picture
 		}catch (IOException e){

@@ -15,8 +15,8 @@ public class PointCoin extends PointItem {
 	 */
 	public static Image pic = null;
 
-	public PointCoin(double x, double y, int left, int right, int top, int bottom) {
-		super(x, y, left, right, top, bottom);
+	public PointCoin(int x, int y) {
+		super(x, y);
 		try{
 			pic = ImageIO.read(PointFruit.class.getResourceAsStream("/resource/coin.jpg"));// getting banana picture
 		}catch (IOException e){

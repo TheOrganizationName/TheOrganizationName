@@ -38,6 +38,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	 public int lives = 3;
 	int width = 1275;
 	int height = 975;
+	int item = 100;
 
 	 final int numFood = 1000;
 
@@ -158,8 +159,11 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 		//Creating locations for the fruits
 		for (int i = 0; i < items.size(); i++) {
 			double random = Math.random() * 10;
-			items.add(new PointFruit(random, random, 0, 100, 0, 100));
-
+			if(random<=4){
+			items.add(new PointFruit((int)points.get(i).getX(),(int)points.get(i).getY()));
+			}
+			else
+				items.add(new PointCoin((int)points.get(i).getX(),(int)points.get(i).getY()));
 		}
 
 
@@ -251,7 +255,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 	}
 
 	public void paintComponent(Graphics g) {
-
+		
 		super.paintComponents(g);
         g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
@@ -314,6 +318,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener{
 			}
 
 		}
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).draw(g);
+		}
+
 
 	}
 	/*
