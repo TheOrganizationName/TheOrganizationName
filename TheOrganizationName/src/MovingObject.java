@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * this class is for all moving objects 
+ * this class is for all moving objects
  * 
  *
  */
@@ -71,9 +71,9 @@ public abstract class MovingObject implements Runnable {
 	 * @param bottom
 	 *            Bottom edge for bouncing.
 	 */
-	
-	public MovingObject(double x, double y, int left, int right, int top,
-			int bottom) {
+
+	public MovingObject(double x, double y, int left, int right, int top, int bottom) {
+		this.pauseDuration = 40;
 		this.xSpeed = 0;
 		this.ySpeed = 0;
 		this.color = Color.black;
@@ -111,10 +111,26 @@ public abstract class MovingObject implements Runnable {
 			animateOneStep();
 			x += xSpeed;
 			y += ySpeed;
-			if (x >= right | x <= left)
-				xSpeed *= -1;
-			if (y >= bottom | y <= top)
-				ySpeed *= -1;
+			if (x >= right) {
+				if (xSpeed > 0) {
+					xSpeed *= -1;
+				}
+			}
+			if (x <= left) {
+				if (xSpeed < 0) {
+					xSpeed *= -1;
+				}
+			}
+			if (y >= bottom) {
+				if (ySpeed > 0) {
+					ySpeed *= -1;
+				}
+			}
+			if (y <= top) {
+				if (ySpeed < 0) {
+					ySpeed *= -1;
+				}
+			}
 			try {
 				Thread.sleep(pauseDuration);
 			} catch (InterruptedException e) {
@@ -134,13 +150,13 @@ public abstract class MovingObject implements Runnable {
 	 * Performs one step of animation.
 	 */
 	abstract public void animateOneStep();
-	
+
 	/**
 	 * Returns the x location.
 	 * 
-	 * @return
-	 *            the current x position.
+	 * @return the current x position.
 	 */
+
 	public double getX() {
 		return x;
 	}
@@ -148,13 +164,28 @@ public abstract class MovingObject implements Runnable {
 	/**
 	 * Returns the y location.
 	 * 
-	 * @return
-	 *            the current y position
+	 * @return the current y position
 	 */
 	public double getY() {
 		return y;
 	}
-	
+
+	public int getBottom() {
+		return bottom;
+	}
+
+	public int getTop() {
+		return top;
+	}
+
+	public int getLeft() {
+		return left;
+	}
+
+	public int getRight() {
+		return right;
+	}
+
 	
 	/**
 	 * Sets the x speed.
@@ -196,7 +227,6 @@ public abstract class MovingObject implements Runnable {
 		this.y = y;
 	}
 
-
 	/**
 	 * Sets color of object.
 	 * 
@@ -205,5 +235,13 @@ public abstract class MovingObject implements Runnable {
 	 */
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public void move(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	public void paintComponent(Graphics g){
+		
 	}
 }
