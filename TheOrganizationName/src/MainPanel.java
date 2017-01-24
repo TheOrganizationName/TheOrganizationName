@@ -30,7 +30,13 @@ import javax.swing.JLabel;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
-
+/**
+ * Modified pacman where the ghosts are in there own box and pacman can go anywhere 
+ * @author 
+ *MainPanel.java
+ *  Jan 17 2017 
+ *   
+ */
 public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMotionListener {
 	 int mouseX = 0;
 	 int mouseY = 0;
@@ -45,7 +51,7 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 
 	int numGhosts = 3;
 	final int pauseDuration = 10;
-	//Ghosts[] ghost = new Ghosts[numGhosts];
+	
 
 	double x;
 	double y;
@@ -62,7 +68,10 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 	public static BufferedImage map = null;
 	public static BufferedImage life = null;
 	Pacman pacman = new Pacman(50, 50, 0, width, 0, height, Shape.PACMAN, 10);
-
+/**
+ * Creates the Jframe
+ * @param args
+ */
 	public static void main(String args[]) {
 
 		JFrame frame = new JFrame("Pacman");
@@ -77,7 +86,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		frame.pack();
 
 	}
-
+/**
+ * displays the location of the food and the coins 
+ */
 	public static void pointsLocation() {
 
 		// Coordinates por points
@@ -120,7 +131,9 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		// TODO Auto-generated method stub
 
 	}
-
+/**
+ * creates the ghosts and the item locations 
+ */
 	public MainPanel() {
 
 		// Start the ghosts bouncing (in its own thread)
@@ -156,43 +169,45 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		addMouseMotionListener(this);
 		Thread gameThread = new Thread(this);
 		gameThread.start();
-		class Sound {
-			private Clip clip;
-
-			public Sound(String fileName) {
-				// specify the sound to play
-				// (assuming the sound can be played by the audio system)
-				// from a wave File
-				try {
-					File file = new File(fileName);
-					if (file.exists()) {
-						AudioInputStream sound = AudioSystem.getAudioInputStream(file);
-						// load the sound into memory (a Clip)
-						clip = AudioSystem.getClip();
-						clip.open(sound);
-					} else {
-						throw new RuntimeException("Sound: file not found: " + fileName);
-					}
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-					throw new RuntimeException("Sound: Malformed URL: " + e);
-				} catch (UnsupportedAudioFileException e) {
-					e.printStackTrace();
-					throw new RuntimeException("Sound: Unsupported Audio File: " + e);
-				} catch (IOException e) {
-					e.printStackTrace();
-					throw new RuntimeException("Sound: Input/Output Error: " + e);
-				} catch (LineUnavailableException e) {
-					e.printStackTrace();
-					throw new RuntimeException("Sound: Line Unavailable Exception Error:" + e);
-				}
-
-				// play, stop, loop the sound clip
-			}
-		}
+//		class Sound {
+//			private Clip clip;
+//
+//			public Sound(String fileName) {
+//				// specify the sound to play
+//				// (assuming the sound can be played by the audio system)
+//				// from a wave File
+//				try {
+//					File file = new File(fileName);
+//					if (file.exists()) {
+//						AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+//						// load the sound into memory (a Clip)
+//						clip = AudioSystem.getClip();
+//						clip.open(sound);
+//					} else {
+//						throw new RuntimeException("Sound: file not found: " + fileName);
+//					}
+//				} catch (MalformedURLException e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("Sound: Malformed URL: " + e);
+//				} catch (UnsupportedAudioFileException e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("Sound: Unsupported Audio File: " + e);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("Sound: Input/Output Error: " + e);
+//				} catch (LineUnavailableException e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("Sound: Line Unavailable Exception Error:" + e);
+//				}
+//
+//				// play, stop, loop the sound clip
+//			}
+//		}
 
 	}
-
+/**
+ * runs the game and sets the speed when the arrow keys are pressed 
+ */
 	public void run() {
 
 		while (true) {
@@ -231,11 +246,11 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 				pacman.setYSpeed(0);
 
 			}
-			 for (int i = 0; i < ghost.size(); i++) {
-						 if (hit(ghost.get(i))) {
-						 lives--;
-						 }
-			 }
+//			 for (int i = 0; i < ghost.size(); i++) {
+//						 if (hit(ghost.get(i))) {
+//						 lives--;
+//						 }
+//			 }
 			repaint();
 			try {
 				Thread.sleep(pauseDuration);
@@ -245,20 +260,22 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 	}
 
 	
-	public boolean hit(Ghosts ghost){
-		int radius = ( ghost).getRadius();
-		 double xDistance = x - ghost.getX();
-		 double yDistance = y- ghost.getY();
-		 double hyp = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+//	public boolean hit(Ghosts ghost){
+//		int radius = ( ghost).getRadius();
+//		 double xDistance = x - ghost.getX();
+//		 double yDistance = y- ghost.getY();
+//		 double hyp = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+//		
+//		 return hyp <= radius;
+//		 }
 		
-		 return hyp <= radius;
-		 }
-		
 		
 	
 	
 	
-	
+	/**
+	 * displays the map, ghosts ,lives, and items to the screen 
+	 */
 	public void paintComponent(Graphics g) {
 
 		super.paintComponents(g);
@@ -286,27 +303,27 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 		g.drawString("Lives :", 0, 20);
 		g.drawString ("Last Known Location: (" + mouseX+ "," + mouseY + ")", 0,70);
 		try {
-			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.png"));
+			life = ImageIO.read(MainPanel.class.getResourceAsStream("Life.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		if (lives == 3) {
-			g.drawImage(life, 50, 0, 100, 50, null);
-			g.drawImage(life, 100, 0, 100, 50, null);
-			g.drawImage(life, 150, 0, 100, 50, null);
+			g.drawImage(life, 50, 0, 50, 50, null);
+			g.drawImage(life, 100, 0, 50, 50, null);
+			g.drawImage(life, 150, 0, 50, 50, null);
 		}
 
 		if (lives == 2) {
 
-			g.drawImage(life, 50, 0, 100, 50, null);
-			g.drawImage(life, 100, 0, 100, 50, null);
+			g.drawImage(life, 50, 0, 50, 50, null);
+			g.drawImage(life, 100, 0, 50, 50, null);
 
 		}
 		if (lives == 1) {
 
-			g.drawImage(life, 50, 0, 100, 50, null);
+			g.drawImage(life, 50, 0, 50, 50, null);
 
 		}
 		if (lives == 0) {
@@ -332,20 +349,22 @@ public class MainPanel extends JPanel implements Runnable, KeyListener , MouseMo
 	 * used for finding the x and y of walls
 	 * 
 	 */
-	 public void mouseDragged(MouseEvent arg0) {
-	 repaint();
-	 }
-
-//	/**
-//	 * used for finding the x and y of walls
-//	 */
-	 public void mouseMoved(MouseEvent arg0) {
-	
-	 mouseX = arg0.getX();
-	 mouseY = arg0.getY();
-	 repaint();
-	 }
-
+//	 public void mouseDragged(MouseEvent arg0) {
+//	 repaint();
+//	 }
+//
+	/**
+	 * used for finding the x and y of walls
+	 */
+//	 public void mouseMoved(MouseEvent arg0) {
+//	
+//	 mouseX = arg0.getX();
+//	 mouseY = arg0.getY();
+//	 repaint();
+//	 }
+/**
+ * checks what key is pressed and checks if pacman hits an enemy 
+ */
 	public void keyPressed(KeyEvent e) {
 		key = e.getKeyCode();
 		repaint();
