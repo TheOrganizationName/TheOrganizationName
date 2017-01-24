@@ -1,6 +1,7 @@
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +14,8 @@ public class PointFruit extends PointItem{
 	/**
 	 * Makes picture a variable
 	 */
+	
 	public static Image pic = null;
-
 	public PointFruit(int x, int y) {
 		super(x, y);
 		try{
